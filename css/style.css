@@ -1,4 +1,12 @@
-
+/* Colours */
+/* line 4, style.scss */
 body {
-	font-size: 16px;
+  background: red;
+}
+
+/* line 15, style.scss */
+#box {
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
 }
