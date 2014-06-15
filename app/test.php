@@ -5,7 +5,7 @@
  * Date: 2014-06-14
  * Time: 10:49 PM
  */
-
+header('Content-Type: application/json');
 ini_set('display_errors', 1);
 require_once('TwitterAPIExchange.php');
 
@@ -42,3 +42,4 @@ $twitter = new TwitterAPIExchange($settings);
 echo $twitter->setGetfield($getfield)
     ->buildOauth($url, $requestMethod)
     ->performRequest();
+
