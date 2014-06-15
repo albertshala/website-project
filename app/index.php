@@ -6,8 +6,8 @@ require_once('TwitterAPIExchange.php');
 $settings = array(
     'oauth_access_token' => "71496187-DKfsbvxz4LV5t40pa1qnrL6lU7uJBqsExDybtzv7U",
     'oauth_access_token_secret' => "WcNxsyqv2pPncZRlrnCt5solInxkcqpBThNM7JtpjHgNm",
-    'consumer_key' => "HITQuRCHEVl3zrN9VRnnSY4Ut",
-    'consumer_secret' => "fmo4cDX1lXFBBbzcNQD8CU7jAdLLbToHDFyxoBtk6p9txd4tUH"
+    'consumer_key' => "KElZJH9UAa6dqnm2Kvi5T0mQB",
+    'consumer_secret' => "Q2Mvdpb9wYHy3EKy6BN7zt1u8WDF0OCtq39B0DKKxyVUUqojsW"
 );
 
 /** URL for REST request, see: https://dev.twitter.com/docs/api/1.1/ **/
