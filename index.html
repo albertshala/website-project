@@ -11,6 +11,25 @@
 	<h1>Site will be up... very soon!!</h1>
 	<p>Last Updated on June 14, 2014</p>
 	<p>Almost there</p>
-	<p></p>
+	<p> <ul></ul></p>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+
+    <script>
+        var searchTerm = 'webdev',
+                numOfTweets = 10,
+                $ul = $('ul'),
+                list='',
+                url = 'http://mediaice.com/website-project/app/?q=' + searchTerm + '&count=' + numOfTweets;
+
+        $.get(url, function (data) {
+
+            $.each(data.statuses, function () {
+                list += '<li>'+ this.text +'</li>';
+            });
+            $ul.html(list);
+        });
+    </script>
 </body>
 </html>
