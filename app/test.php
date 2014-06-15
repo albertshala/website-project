@@ -6,57 +6,40 @@
  * Time: 10:49 PM
  */
 
-echo "test";
+<?php
+ini_set('display_errors', 1);
+require_once('TwitterAPIExchange.php');
 
-    function buildBaseString($baseURI, $method, $params) {
-        $r = array();
-        ksort($params);
-        foreach($params as $key=>$value){
-            $r[] = "$key=" . rawurlencode($value);
-        }
-        return $method."&" . rawurlencode($baseURI) . '&' . rawurlencode(implode('&', $r));
-    }
+/** Set access tokens here - see: https://dev.twitter.com/apps/ **/
+$settings = array(
+    'oauth_access_token' => "71496187-DKfsbvxz4LV5t40pa1qnrL6lU7uJBqsExDybtzv7U",
+    'oauth_access_token_secret' => "WcNxsyqv2pPncZRlrnCt5solInxkcqpBThNM7JtpjHgNm",
+    'consumer_key' => "HITQuRCHEVl3zrN9VRnnSY4Ut",
+    'consumer_secret' => "fmo4cDX1lXFBBbzcNQD8CU7jAdLLbToHDFyxoBtk6p9txd4tUH"
+);
 
-    function buildAuthorizationHeader($oauth) {
-        $r = 'Authorization: OAuth ';
-        $values = array();
-        foreach($oauth as $key=>$value)
-            $values[] = "$key=\"" . rawurlencode($value) . "\"";
-        $r .= implode(', ', $values);
-        return $r;
-    }
+/** URL for REST request, see: https://dev.twitter.com/docs/api/1.1/ **/
+$url = 'https://api.twitter.com/1.1/blocks/create.json';
+$requestMethod = 'POST';
 
-    $url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
+/** POST fields required by the URL above. See relevant docs as above **/
+$postfields = array(
+    'screen_name' => 'usernameToBlock',
+    'skip_status' => '1'
+);
 
-    $oauth_access_token = "71496187-DKfsbvxz4LV5t40pa1qnrL6lU7uJBqsExDybtzv7U";
-    $oauth_access_token_secret = "WcNxsyqv2pPncZRlrnCt5solInxkcqpBThNM7JtpjHgNm";
-    $consumer_key = "HITQuRCHEVl3zrN9VRnnSY4Ut";
-    $consumer_secret = "fmo4cDX1lXFBBbzcNQD8CU7jAdLLbToHDFyxoBtk6p9txd4tUH";
+/** Perform a POST request and echo the response **/
+$twitter = new TwitterAPIExchange($settings);
+echo $twitter->buildOauth($url, $requestMethod)
+    ->setPostfields($postfields)
+    ->performRequest();
 
-    $oauth = array( 'oauth_consumer_key' => $consumer_key,
-        'oauth_nonce' => time(),
-        'oauth_signature_method' => 'HMAC-SHA1',
-        'oauth_token' => $oauth_access_token,
-        'oauth_timestamp' => time(),
-        'oauth_version' => '1.1');
-
-    $base_info = buildBaseString($url, 'GET', $oauth);
-    $composite_key = rawurlencode($consumer_secret) . '&' . rawurlencode($oauth_access_token_secret);
-    $oauth_signature = base64_encode(hash_hmac('sha1', $base_info, $composite_key, true));
-    $oauth['oauth_signature'] = $oauth_signature;
-
-    // Make requests
-    $header = array(buildAuthorizationHeader($oauth), 'Expect:');
-    $options = array( CURLOPT_HTTPHEADER => $header,
-        //CURLOPT_POSTFIELDS => $postfields,
-        CURLOPT_HEADER => false,
-        CURLOPT_URL => $url,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_SSL_VERIFYPEER => false);
-
-    $feed = curl_init();
-    curl_setopt_array($feed, $options);
-    $json = curl_exec($feed);
-    curl_close($feed);
-
-    $twitter_data = json_decode($json);
+/** Perform a GET request and echo the response **/
+/** Note: Set the GET field BEFORE calling buildOauth(); **/
+$url = 'https://api.twitter.com/1.1/followers/ids.json';
+$getfield = '?screen_name=J7mbo';
+$requestMethod = 'GET';
+$twitter = new TwitterAPIExchange($settings);
+echo $twitter->setGetfield($getfield)
+    ->buildOauth($url, $requestMethod)
+    ->performRequest();
