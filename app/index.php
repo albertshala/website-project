@@ -14,7 +14,7 @@ $settings = array(
 /** Perform a GET request and echo the response **/
 /** Note: Set the GET field BEFORE calling buildOauth(); **/
 $url = 'https://api.twitter.com/1.1/followers/ids.json';
-$getfield = '?screen_name=J7mbo';
+$getfield = '?screen_name=albert_shala';
 $requestMethod = 'GET';
 $twitter = new TwitterAPIExchange($settings);
 echo $twitter->setGetfield($getfield)
