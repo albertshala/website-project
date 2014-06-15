@@ -5,6 +5,9 @@
  * Date: 2014-06-14
  * Time: 10:49 PM
  */
+
+echo "test";
+
     function buildBaseString($baseURI, $method, $params) {
         $r = array();
         ksort($params);
@@ -35,7 +38,7 @@
         'oauth_signature_method' => 'HMAC-SHA1',
         'oauth_token' => $oauth_access_token,
         'oauth_timestamp' => time(),
-        'oauth_version' => '1.0');
+        'oauth_version' => '1.1');
 
     $base_info = buildBaseString($url, 'GET', $oauth);
     $composite_key = rawurlencode($consumer_secret) . '&' . rawurlencode($oauth_access_token_secret);
