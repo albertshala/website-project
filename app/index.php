@@ -10,21 +10,6 @@ $settings = array(
     'consumer_secret' => "Q2Mvdpb9wYHy3EKy6BN7zt1u8WDF0OCtq39B0DKKxyVUUqojsW"
 );
 
-/** URL for REST request, see: https://dev.twitter.com/docs/api/1.1/ **/
-$url = 'https://api.twitter.com/1.1/blocks/create.json';
-$requestMethod = 'POST';
-
-/** POST fields required by the URL above. See relevant docs as above **/
-$postfields = array(
-    'screen_name' => 'usernameToBlock', 
-    'skip_status' => '1'
-);
-
-/** Perform a POST request and echo the response **/
-$twitter = new TwitterAPIExchange($settings);
-echo $twitter->buildOauth($url, $requestMethod)
-             ->setPostfields($postfields)
-             ->performRequest();
 
 /** Perform a GET request and echo the response **/
 /** Note: Set the GET field BEFORE calling buildOauth(); **/
