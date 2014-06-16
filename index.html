@@ -30,6 +30,49 @@
             });
             $ul.html(list);
         });
+
+        var friends = {
+            bill: {
+                firstName: "Bill",
+                lastName: "Gates",
+                number: "(206) 555-555",
+                address: ['One Microsoft Way','Redmond','WA','98052']
+            },
+            steve: {
+                firstName: "Steve",
+                lastName: "Jobs",
+                number: "(106) 555-555",
+                address: []
+            }
+        };
+
+        function list(key) {
+            for(var value in key) {
+                console.log(value);
+            }
+        }
+
+        var search = function(name) {
+            for(var key in friends) {
+                if(friends[key].firstName === name) {
+                    console.log(friends[key]);
+
+                }
+                return friends[key];
+            }
+        };
+
+
+
+
+        var searchSite = function() {
+            for(var i in friends){
+                console.log(friends[i]);
+            }
+            return;
+        };
+
+
     </script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <?php
 require_once('TwitterAPIExchange.php');
+
 /** Set access tokens here - see: https://dev.twitter.com/apps/ **/
 $settings = array(
     'oauth_access_token' => "71496187-DKfsbvxz4LV5t40pa1qnrL6lU7uJBqsExDybtzv7U",
@@ -7,7 +8,9 @@ $settings = array(
     'consumer_key' => "KElZJH9UAa6dqnm2Kvi5T0mQB",
     'consumer_secret' => "Q2Mvdpb9wYHy3EKy6BN7zt1u8WDF0OCtq39B0DKKxyVUUqojsW"
 );
-$url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
+
+$url = "https://api.twitter.com/1.1/statuses/show.json";
+
 $requestMethod = "GET";
 if (isset($_GET['user'])) {$user = $_GET['user'];} else {$user = "iagdotme";}
 if (isset($_GET['count'])) {$user = $_GET['count'];} else {$count = 20;}
@@ -27,4 +30,3 @@ foreach($string as $items)
     echo "Friends: ". $items['user']['friends_count']."<br />";
     echo "Listed: ". $items['user']['listed_count']."<br /><hr />";
 }
-?>
